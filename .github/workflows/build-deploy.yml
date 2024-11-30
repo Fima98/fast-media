@@ -69,33 +69,31 @@ jobs:
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
-
-
   deploy:
-  runs-on: ubuntu-latest
-  needs: [build]
-  environment:
-    name: production
-  steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    runs-on: ubuntu-latest
+    needs: [build]
+    environment:
+      name: production
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Log in to Heroku Docker Registry
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: |
-        echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com
+      - name: Log in to Heroku Docker Registry
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com
 
-    - name: Tag Docker Image
-      run: |
-        docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/social-media:latest registry.heroku.com/fast-media-yevfimii/web
+      - name: Tag Docker Image
+        run: |
+          docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/social-media:latest registry.heroku.com/fast-media-yevfimii/web
 
-    - name: Push Docker Image to Heroku
-      run: |
-        docker push registry.heroku.com/fast-media-yevfimii/web
+      - name: Push Docker Image to Heroku
+        run: |
+          docker push registry.heroku.com/fast-media-yevfimii/web
 
-    - name: Release the App on Heroku
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: |
-        heroku container:release web --app fast-media-yevfimii
+      - name: Release the App on Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          heroku container:release web --app fast-media-yevfimii

@@ -1,0 +1,6 @@
+__pycache__
+.pytest_cashe
+.venv/
+venv/
+.env
+docker-compose-dev.yml

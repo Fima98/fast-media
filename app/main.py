@@ -23,4 +23,4 @@ app.include_router(vote.router)
 
 @app.get("/")
 def root():
-    return {"message": "Hello World!! Learned CI/CD"}
+    return {"message": "Hello World!! I'm learning FastAPI with CI/CD and deployed to Heroku and Ubuntu server"}

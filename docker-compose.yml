@@ -1,7 +1,6 @@
-version: '4'
 services:
   api:
-    build: fima98/social-media
+    build: ./
     ports:
       - 80:8000
     environment:
@@ -14,7 +13,7 @@ services:
       - ALGORITHM=${ALGORITHM}
       - ACCESS_TOKEN_EXPIRE_MINUTES=${ACCESS_TOKEN_EXPIRE_MINUTES}
     depends_on:
-        - postgres
+      - postgres
 
   postgres:
     image: postgres
@@ -26,4 +25,3 @@ services:
 
 volumes:
   postgres-db:
-    

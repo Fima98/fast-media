@@ -55,7 +55,7 @@ jobs:
               uses: docker/login-action@v2
               with:
                 username: fima98
-                password: ${{ secrets.DOCKER_PASSWORD }}
+                password: ${{ secrets.DOCKER_HUB_PASSWORD }}
         
             # Build the Docker image using Docker Compose
             - name: Build Docker image
